@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>10子组件和父组件</title>
+</head>
+<body>
+	<div id="box">
+		<dad-com></dad-com>
+	</div>
+	<!-- 孩子组件一定要放在父亲的模板中 -->
+	<template id="dad">
+		<h1>{{msg}}</h1>
+		<p>{{str}}</p>
+		<br>
+		<child-com :dadata.sync="str"></child-com>
+	</template>
+	<template id="child">
+		<h1>{{msg}}</h1>
+		<p>自己的数据->{{str}}</p>
+		<input type="button" value="改变fu数据" @click="change()" >
+		<p>fu的数据->{{dadata}}</p>
+	</template>
+</body>
+<script type="text/javascript" src="js/vue1.js"></script>
+<script type="text/javascript">
+	window.onload = function(){
+		var vm = new Vue({
+			el:"#box",
+			components:{
+				'dad-com':{
+					data(){
+						return {
+							msg:'父及组件',
+							str:'父字符串'
+						}
+					},
+					template:'#dad',
+					components:{
+						'child-com':{
+							props:['dadata'],
+							data(){
+								return {
+									msg:'孩子组件',
+									str:'孩子字符串'
+								}
+							},
+							methods:{
+								change(){
+									this.dadata = '改变父数据'
+								}
+							},
+							template:'#child'
+						}
+					}
+				}
+			}
+		});
+	}
+</script>
+</html>
