@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>13单一事件中心管理组件通信</title>
+	<title>14单一事件中心管理组件通信</title>
 </head>
 <body>
 	<div id="box">
@@ -10,30 +10,6 @@
 		<com-b></com-b>
 		<com-c></com-c>
 	</div>
-	<template id="boxA">
-		<div>
-			<strong>{{str}}</strong>
-			<span>{{msg}}</span>
-			<input type="button" value="把数据A给数据C" @click="send()">
-		</div>
-	</template>
-	<template id="boxB">
-		<div>
-			<strong>{{str}}</strong>
-			<span>{{msg}}</span>
-			<input type="button" value="把数据B给数据C" @click="send()">
-		</div>
-	</template>
-	<template id="boxC">
-		<div>
-			<strong>这是组件C</strong>
-			<br>
-			<span>接收的A数据是：{{msg1}}</span>
-			<br>
-			<span>接收的B数据是：{{msg2}}</span>
-		</div>
-	</template>
-
 </body>
 <script type="text/javascript" src="js/vue2.js"></script>
 <script type="text/javascript">
@@ -41,7 +17,7 @@
 	var Event = new Vue();
 
 	var A = {
-		template:'#boxA',
+		template:'<div><strong>{{str}}</strong><span>{{msg}}</span><input type="button" value="把数据A给C" @click="send()"/></div>',
 		data(){
 			return {
 				str:'这是组件A',
@@ -56,7 +32,7 @@
 	}
 
 	var B = {
-		template:'#boxB',
+		template:'<div><strong>{{str}}</strong><span>{{msg}}</span><input type="button" value="把数据B给C" @click="send()"/></div>',
 		data(){
 			return {
 				str:'这是组件B',
@@ -71,7 +47,7 @@
 	}
 
 	var C = {
-		template:'#boxC',
+		template:'<div><strong>这是组件C</strong><br /><span>接收的A数据是:{{msg1}}</span><br /><span>接收的A数据是:{{msg2}}</span></div>',
 		data(){
 			return {
 				msg1:'',
@@ -79,10 +55,13 @@
 			}
 		},
 		mounted(){
+			// 注意：this!!
+			// alert(this);
+			// console.log(this);
 			Event.$on('a-data',function(s){
 				this.msg1 = s;
 			}.bind(this));
-
+			
 			Event.$on('b-data',function(s){
 				this.msg2 = s;
 			}.bind(this));
@@ -98,6 +77,7 @@
 				'com-c':C
 			}
 		});
+		console.log('vm',vm);
 	};
 </script>
 </html>
