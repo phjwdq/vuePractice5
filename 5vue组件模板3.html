@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>1vue1</title>
+</head>
+<body>
+	<div id="box">
+		{{msg}}
+		<my-aaa></my-aaa>
+	</div>
+	<template id="aaa">
+		<div>
+			<h1>这是组件模板</h1>
+			<p>环境</p>
+		</div>
+	</template>
+</body>
+<script src="js/vue2.js"></script>
+<script>
+	Vue.component('my-aaa',{
+		template:'#aaa'
+	});
+	window.onload = function(){
+		var vm = new Vue({
+			el:'#box',
+			data:{
+				msg:'welcome vue2.0'
+			}
+		}); 
+	};
+	
+</script>
+</html>

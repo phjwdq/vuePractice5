@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>9自定义过滤器</title>
+</head>
+<body>
+	<div id="box">
+		{{ num | toDou('str','999')}}
+	</div>
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	Vue.filter('toDou',function(n,str1,str2){
+		alert(str1+str2);
+		return n < 10 ? '0'+n : n;
+	})
+	window.onload = function(){
+		var vm = new Vue({
+			el:'#box',
+			data:{
+				num:9
+			},
+			methods:{
+				toDou(n){
+
+				}
+			}
+		});
+	}
+</script>
+</html>

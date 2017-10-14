@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>6生命周期1</title>
+</head>
+<body>
+	<div id="box">
+		<p>{{msg}}</p>
+		<button @click="update()">更新组件</button>
+		<input type="button" value="摧毁组件" @click="des()">
+	</div>
+</body>
+<script type="text/javascript" src="js/vue2.js"></script>
+<script type="text/javascript">
+	window.onload = function(){
+		var vm = new Vue({
+			el:'#box',
+			data:{
+				msg:'welcome vue2.0'
+			},
+			methods:{
+				update(){
+					var str = this.msg;
+					this.msg = str.split("");
+				},
+				des(){
+					this.$destroy();
+				}
+			},
+			beforeCreate(){
+				console.log('组件实例刚刚创建')
+			},
+			created(){
+				console.log('组件实例创建完毕')
+			},
+			beforeMount(){
+				console.log('模板编译之前');
+			},
+			mounted(){
+				console.log('模板编译完毕');
+			},
+			beforeUpdate(){
+				console.log('组件更新之前');
+			},
+			updated(){
+				console.log('组件更新完毕');
+			},
+			beforeDestroy(){
+				console.log('组件摧毁之前');
+			},
+			destroyed(){
+				console.log('组件摧毁完毕');
+			}
+		});
+	}
+</script>
+</html>

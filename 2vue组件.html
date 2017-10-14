@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>1vue1</title>
+</head>
+<body>
+	<div id="box">
+		{{msg}}
+		<my-aaa></my-aaa>
+	</div>
+	<!-- 在vue2中，一定要template中再加根元素div -->
+	<template id="aaa">
+		<div>
+			<h1>这是组件</h1>
+			<strong>这是加粗</strong>
+		</div>
+	</template>
+</body>
+<script src="js/vue2.js"></script>
+<script>
+	var Home = {//组件的简介定义json
+		template:'#aaa'
+	}
+	// 全局组件
+	// Vue.component('my-aaa',Home);
+	window.onload = function(){
+		var vm = new Vue({
+			el:'#box',
+			data:{
+				msg:'welcome vue2.0'
+			},
+			components:{//局部
+				'my-aaa':Home
+			}
+		}); 
+	};
+	
+</script>
+</html>
